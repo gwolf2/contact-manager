@@ -15,6 +15,12 @@ function setContact(contact){
   setContacts(_contacts);
 }
 
+function deleteContact(id){
+  console.log('deleting contact... '+id);
+  let index = _contacts.findIndex(x => x.id === id);
+  _contacts.splice(index, 1);
+}
+
 function sortByName(a, b){
   var aName = a.name.toLowerCase();
   var bName = b.name.toLowerCase();
@@ -46,22 +52,32 @@ AppStore.dispatchToken = AppDispatcher.register(action => {
     case AppConstants.RECEIVE_CONTACTS:
       setContacts(action.contacts);
       AppStore.emitChange();
-      break
+      break;
 
     case AppConstants.RECEIVE_CONTACTS_ERROR:
       alert(action.message);
       AppStore.emitChange();
-      break
+      break;
 
     case AppConstants.RECEIVE_CONTACT:
       setContact(action.contact);
       AppStore.emitChange();
-      break
+      break;
 
     case AppConstants.RECEIVE_CONTACT_ERROR:
       alert(action.message);
       AppStore.emitChange();
-      break
+      break;
+
+    case AppConstants.DELETE_CONTACT:
+      deleteContact(action.id);
+      AppStore.emitChange();
+      break;
+
+    case AppConstants.DELETE_CONTACT_ERROR:
+      alert(action.message);
+      AppStore.emitChange();
+      break;
 
     default:
   }
