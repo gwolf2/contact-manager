@@ -35,7 +35,9 @@ AppStore.dispatchToken = AppDispatcher.register(action => {
     case AppConstants.RECEIVE_CONTACTS:
       setContacts(action.contacts);
       AppStore.emitChange();
-      break;
+      break
+
+    default:
   }
 });
 
